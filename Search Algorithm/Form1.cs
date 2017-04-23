@@ -14,14 +14,22 @@ namespace Search_Algorithm
     public delegate void DFlash(Node tmp);
     public partial class Form1 : Form
     {
+        int width = 17, height = 10;
+        int[,] stat;
+        int[,] f;
+        int[,] g;
+        int[,] h;
+        bool[,] close;
+        bool[,] open;
+        Node start, end;
+        Node[,] father;
+        Button[,] btn;
+
         public Form1()
         {
             InitializeComponent();
         }
-        int width = 17, height = 10;
-        Button[,] btn;
-        int[,] stat;
-        Node start, end;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Width = width * 51 + 96;
@@ -44,6 +52,7 @@ namespace Search_Algorithm
                 }
             }
         }
+
         private void BtnOnClick(object sender, EventArgs e)
         {
             Button me = (Button)sender;
@@ -74,6 +83,7 @@ namespace Search_Algorithm
                 me.BackColor=Color.LightGray;
             }
         }
+
         public void Flash(Node tmp)
         {
             for (int i = 0; i < 0; i++)
@@ -86,6 +96,7 @@ namespace Search_Algorithm
                 System.Threading.Thread.Sleep(50);
             }
         }
+
         private void Button1_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < width; i++)
@@ -108,19 +119,13 @@ namespace Search_Algorithm
             }
             Init();
             int ans = Solve(out List<Node> path, Flash);
-            button1.Text = ans.ToString();
+            MessageBox.Show(ans.ToString());
             foreach(var i in path)
             {
                 btn[i.x, i.y].ForeColor = Color.Red;
                 btn[i.x, i.y].Text = "O";
             }
         }
-        Node[,] father;
-        int[,] f;
-        int[,] g;
-        int[,] h;
-        bool[,] close;
-        bool[,] open;
 
         public void Init()
         {
@@ -131,14 +136,17 @@ namespace Search_Algorithm
             close = new bool[width, height];
             father = new Node[width, height];
         }
+
         bool CanGo(int xx, int yy)
         {
             return xx >= 0 && yy >= 0 && xx < width && yy < height;
         }
+
         int GetH(int x, int y)
         {
             return Math.Abs(x - end.x) + Math.Abs(y - end.y);
         }
+
         public int Solve(out List<Node> path, DFlash Flash)
         {
             path = new List<Node>();
