@@ -119,12 +119,12 @@ namespace Search_Algorithm
             }
             Init();
             int ans = Solve(out List<Node> path, Flash);
-            MessageBox.Show(ans.ToString());
             foreach(var i in path)
             {
                 btn[i.x, i.y].ForeColor = Color.Red;
                 btn[i.x, i.y].Text = "O";
             }
+            MessageBox.Show(ans.ToString());
         }
 
         public void Init()
