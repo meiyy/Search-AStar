@@ -124,7 +124,7 @@ namespace Search_Algorithm
                 btn[i.x, i.y].ForeColor = Color.Red;
                 btn[i.x, i.y].Text = "O";
             }
-            MessageBox.Show(ans.ToString());
+            MessageBox.Show("路径长度是："+ans.ToString());
         }
 
         public void Init()
